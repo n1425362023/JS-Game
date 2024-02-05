@@ -31,8 +31,8 @@ export class Player{
         if (this.y<0) this.y=0;
         else if (this.y>this.game.height-this.height) this.y=this.game.height-this.height;
         
-        /*if(input.includes('w')&&input.indexOf('w')>input.indexOf('s')&&this.onGround()) this.speedY-=20;
-        this.y += this.speedY;*/
+        /*if(input.includes('w')&&input.indexOf('w')>input.indexOf('s')&&this.onGround()) this.speedY-=20;*/
+        this.y += this.speedY;
         if (!this.onGround()) this.speedY +=this.gravity;
         else this.speedY=0;
         }
