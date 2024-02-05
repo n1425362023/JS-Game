@@ -1,4 +1,4 @@
-import {Sitting, Running,Jumping } from './state.js';
+import {Sitting, Running,Jumping,Falling } from './state.js';
 export class Player{
     constructor(game){
         this.game=game;
@@ -15,10 +15,11 @@ export class Player{
         this.speedY=5;
         this.gravity=0.5;
         //状态添加
-        this.states = [new Sitting(this),new Running(this),new Jumping(this)];
-        this.currentState=this.states[0];
+        this.states = [new Sitting(this),new Running(this),new Jumping(this),new Falling(this)];
+        this.currentState=null;
     }
     update(input){
+        //默认角色初始状态
         this.currentState.handleInput(input);
         //键盘输入控制角色
         if (input.includes('d')&&input.indexOf('d')>input.indexOf('a')) this.x+=this.maxSpeed;
@@ -30,8 +31,8 @@ export class Player{
         if (this.y<0) this.y=0;
         else if (this.y>this.game.height-this.height) this.y=this.game.height-this.height;
         
-        if(input.includes('w')&&input.indexOf('w')>input.indexOf('s')&&this.onGround()) this.speedY-=20;
-        this.y += this.speedY;
+        /*if(input.includes('w')&&input.indexOf('w')>input.indexOf('s')&&this.onGround()) this.speedY-=20;
+        this.y += this.speedY;*/
         if (!this.onGround()) this.speedY +=this.gravity;
         else this.speedY=0;
         }
@@ -44,6 +45,7 @@ export class Player{
         return this.y>=this.game.height-this.height;
     }
     setState(state){
+        //通过第23行代码被'.state.js'的handleInput执行
         this.currentState=this.states[state];
         this.currentState.enter();
     }

@@ -43,12 +43,12 @@ export class Running extends State {
         this.player.frameY=3;
     }
     handleInput(input){
-        if(input.includes('s') ){
-            this.player.setState(state.SITTING);
-        }else if (input.includes('w')){
+        if (input.includes('w')){
             this.player.setState(state.JUMPING);
         }else if (input.includes('s') && !this.player.onGround()){
             this.player.setState(state.FALLING);
+        }else if(input.includes('s') && this.player.onGround()){
+            this.player.setState(state.SITTING); 
         }
     }
 }
@@ -64,8 +64,24 @@ export class Jumping extends State {
         this.player.frameY=1;
     }
     handleInput(input){
-        if(input.includes('s') ){
-            this.player.setState(state.SITTING);
+        if (this.player.onGround()){
+            this.player.setState(state.FALLING);
+        }
+    }
+}
+export class Falling extends State {
+    constructor(player){
+        super('FALLING');
+        this.player = player;
+    }
+
+   
+    enter(){
+        this.player.frameY=2;
+    }
+    handleInput(input){
+        if (this.player.onGround()){
+            this.player.setState(state.RUNNING);
         }
     }
 }

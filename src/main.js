@@ -14,6 +14,8 @@ window.addEventListener('load',function(){
             this.player = new Player(this);
 
             this.input=new InputHandler(this);
+            this.player.currentState = this.player.states[0]
+            this.player.currentState.enter()
 
 
         }
