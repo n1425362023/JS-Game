@@ -1,4 +1,4 @@
-import {Sitting, RUNNING,JUMPING} from './state.js';
+import {Sitting, Running,Jumping } from './state.js';
 export class Player{
     constructor(game){
         this.game=game;
@@ -14,7 +14,8 @@ export class Player{
         this.maxSpeed=5;
         this.speedY=5;
         this.gravity=0.5;
-        this.states = [new Sitting(this),new RUNNING(this),new JUMPING(this)];
+        //状态添加
+        this.states = [new Sitting(this),new Running(this),new Jumping(this)];
         this.currentState=this.states[0];
     }
     update(input){
