@@ -12,7 +12,7 @@ export class InputHandler{
             this.keys.indexOf(e.key) === -1
             ){
                 this.keys.push(e.key);
-                console.log(e.keys);
+ 
             }
         });
         window.addEventListener('keyup', (e)=>{
@@ -23,7 +23,6 @@ export class InputHandler{
             e.key === 'j'||
             e.key === 'p'){
                 this.keys.splice(this.keys.indexOf(e.key), 1);
-                console.log(e.keys);
             }
         });
     }

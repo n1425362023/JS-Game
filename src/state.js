@@ -60,11 +60,13 @@ export class Jumping extends State {
 
    
     enter(){
-        if(!this.player.onGround()) this.player.speedY-=20;
+        if(this.player.onGround()) this.player.speedY-=20;
+        //this.player.y += this.player.speedY;    // 错误代码：在一次跳跃函数只运行一次
+        
         this.player.frameY=1;
     }
     handleInput(input){
-        if (this.player.onGround()){
+        if (this.player.speedY > this.player.gravity){
             this.player.setState(state.FALLING);
         }
     }

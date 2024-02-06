@@ -9,7 +9,7 @@ export class Player{
         this.image=document.getElementById('player');
         this.frameX=0;
         this.frameY=0;
-        this.MaxframeX=7;
+        this.MaxframeX=4;
         this.speed=0;
         this.maxSpeed=5;
         this.speedY=5;
@@ -17,8 +17,11 @@ export class Player{
         //状态添加
         this.states = [new Sitting(this),new Running(this),new Jumping(this),new Falling(this)];
         this.currentState=null;
+        this.fps = 10;
+        this.frameInterval = 1000/this.fps;
+        this.frameTimer = 0;
     }
-    update(input){
+    update(input,deltaTime){
         //默认角色初始状态
         this.currentState.handleInput(input);
         //键盘输入控制角色
@@ -33,8 +36,18 @@ export class Player{
         
         /*if(input.includes('w')&&input.indexOf('w')>input.indexOf('s')&&this.onGround()) this.speedY-=20;*/
         this.y += this.speedY;
+        
         if (!this.onGround()) this.speedY +=this.gravity;
         else this.speedY=0;
+        if (this.frameTimer>this.frameInterval){
+            this.frameTimer=0;
+            if (this.frameX<this.MaxframeX) this.frameX++;
+            else this.frameX=0;
+            
+        }else this.frameTimer+=deltaTime;
+        console.log(deltaTime);
+        console.log(this.frameTimer);
+        console.log(this.frameX);
         }
     draw(context){
          
