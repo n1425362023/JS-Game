@@ -11,11 +11,14 @@ window.addEventListener('load',function(){
         constructor(width,height){
             this.width=width;
             this.height=height;
+            this.groundMargin=-4;
             this.player = new Player(this);
-
             this.input=new InputHandler(this);
             this.player.currentState = this.player.states[0]
-            this.player.currentState.enter()
+            this.player.currentState.enter();
+            
+            
+
 
 
         }

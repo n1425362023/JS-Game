@@ -20,6 +20,7 @@ export class Sitting extends State {
 
    
     enter(){
+        this.player.MaxframeX=4
         this.player.frameY=5;
     }
     handleInput(input){
@@ -40,7 +41,9 @@ export class Running extends State {
 
    
     enter(){
+        this.player.MaxframeX=6;
         this.player.frameY=3;
+        
     }
     handleInput(input){
         if (input.includes('w')){
@@ -60,9 +63,10 @@ export class Jumping extends State {
 
    
     enter(){
+        
         if(this.player.onGround()) this.player.speedY-=20;
         //this.player.y += this.player.speedY;    // 错误代码：在一次跳跃函数只运行一次
-        
+        this.player.MaxframeX=6;
         this.player.frameY=1;
     }
     handleInput(input){

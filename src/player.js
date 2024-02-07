@@ -5,7 +5,7 @@ export class Player{
         this.width=100;
         this.height=91.3;
         this.x=0;
-        this.y=this.game.height-this.height;
+        this.y=this.game.height-this.height-this.game.groundMargin;
         this.image=document.getElementById('player');
         this.frameX=0;
         this.frameY=0;
@@ -15,11 +15,12 @@ export class Player{
         this.speedY=5;
         this.gravity=0.5;
         //状态添加
-        this.states = [new Sitting(this),new Running(this),new Jumping(this),new Falling(this)];
+       
         this.currentState=null;
-        this.fps = 10;
-        this.frameInterval = 1000/this.fps;
-        this.frameTimer = 0;
+        this.fps=20;
+        this.frameInterval=1000/this.fps;
+        this.frameTimer=0;
+        this.states = [new Sitting(this),new Running(this),new Jumping(this),new Falling(this)];
     }
     update(input,deltaTime){
         //默认角色初始状态
@@ -32,7 +33,7 @@ export class Player{
         if (this.x<0) this.x=0;
         else if (this.x>this.game.width-this.width) this.x=this.game.width-this.width;    
         if (this.y<0) this.y=0;
-        else if (this.y>this.game.height-this.height) this.y=this.game.height-this.height;
+        else if (this.y>this.game.height-this.height-this.game.groundMargin) this.y=this.game.height-this.height-this.game.groundMargin;
         
         /*if(input.includes('w')&&input.indexOf('w')>input.indexOf('s')&&this.onGround()) this.speedY-=20;*/
         this.y += this.speedY;
@@ -45,9 +46,9 @@ export class Player{
             else this.frameX=0;
             
         }else this.frameTimer+=deltaTime;
-        console.log(deltaTime);
-        console.log(this.frameTimer);
-        console.log(this.frameX);
+        /*console.log(deltaTime);*/
+        //console.log(this.frameTimer);
+        //console.log(this.frameX);
         }
     draw(context){
          
@@ -55,7 +56,7 @@ export class Player{
     }   
   
     onGround(){
-        return this.y>=this.game.height-this.height;
+        return this.y>=this.game.height-this.height-this.game.groundMargin;
     }
     setState(state){
         //通过第23行代码被'.state.js'的handleInput执行
