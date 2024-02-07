@@ -20,11 +20,11 @@ export class Sitting extends State {
 
    
     enter(){
-        this.player.MaxframeX=4
+        this.player.MaxFrameX=4
         this.player.frameY=5;
     }
     handleInput(input){
-        if(input.includes('a') || input.includes('d')){
+        if((input.includes('a') || input.includes('d'))&&(input.indexOf('s')<input.indexOf('a')||(input.indexOf('s')<input.indexOf('d')))){
             this.player.setState(state.RUNNING);
         }else if (input.includes('w')){
             this.player.setState(state.JUMPING);
@@ -41,7 +41,7 @@ export class Running extends State {
 
    
     enter(){
-        this.player.MaxframeX=6;
+        this.player.MaxFrameX=6;
         this.player.frameY=3;
         
     }
@@ -50,10 +50,14 @@ export class Running extends State {
             this.player.setState(state.JUMPING);
         }else if (input.includes('s') && !this.player.onGround()){
             this.player.setState(state.FALLING);
-        }else if(input.includes('s') && this.player.onGround()){
+        }else if(input.includes('s') && this.player.onGround()&&(input.indexOf('s')>input.indexOf('a')||(input.indexOf('s')>input.indexOf('d')))){
             this.player.setState(state.SITTING); 
-        }
+        }/*else if (!input.includes('a')&&!input.includes('d')){
+            this.player.setState(state.SITTING); 
+            觉得效果不好看就没加
+        }*/
     }
+            
 }
 export class Jumping extends State {
     constructor(player){
@@ -66,7 +70,7 @@ export class Jumping extends State {
         
         if(this.player.onGround()) this.player.speedY-=20;
         //this.player.y += this.player.speedY;    // 错误代码：在一次跳跃函数只运行一次
-        this.player.MaxframeX=6;
+        this.player.MaxFrameX=6;
         this.player.frameY=1;
     }
     handleInput(input){
@@ -80,7 +84,6 @@ export class Falling extends State {
         super('FALLING');
         this.player = player;
     }
-
    
     enter(){
         this.player.frameY=2;
