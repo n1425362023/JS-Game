@@ -12,7 +12,7 @@ window.addEventListener('load',function(){
         constructor(width,height){
             this.width=width;
             this.height=height;
-            this.groundMargin=115;                //方便设置角色在屏幕的位置
+            this.groundMargin=110;                //方便设置角色在屏幕的位置
             this.player = new Player(this);
             this.input=new InputHandler(this);
             this.player.currentState = this.player.states[0]

@@ -1,9 +1,20 @@
-import {Sitting, Running,Jumping,Falling } from './state.js';
+import {
+    StandingLeft,
+    StandingRight,
+    SittingLeft,
+    SittingRight,
+    RunningLeft,
+    RunningRight,
+    JumpingLeft,
+    JumpingRight,
+    FallingLeft,
+    FallingRight 
+} from './state.js';
 export class Player{
     constructor(game){
         this.game=game;
-        this.width=100;
-        this.height=91.3;
+        this.width=200;
+        this.height=182;
         this.x=0;
         this.y=this.game.height-this.height-this.game.groundMargin;
         this.speedY=5;
@@ -19,7 +30,18 @@ export class Player{
         this.frameInterval=1000/this.fps;
         this.frameTimer = 0;
         //状态添加
-        this.states = [new Sitting(this),new Running(this),new Jumping(this),new Falling(this)];
+        this.states = [
+            new StandingLeft(this),
+            new StandingRight(this),
+            new SittingLeft(this),
+            new SittingRight(this),
+            new RunningLeft(this),
+            new RunningRight(this),
+            new JumpingLeft(this),
+            new JumpingRight(this),
+            new FallingLeft(this),
+            new FallingRight(this)
+        ]
         this.currentState=null;
     }
     update(input,deltaTime){
@@ -29,14 +51,15 @@ export class Player{
         if (input.includes('d')&&input.indexOf('d')>input.indexOf('a')) this.x+=this.maxSpeed;
         else if (input.includes('a')&&input.indexOf('a')>input.indexOf('d')) this.x-=this.maxSpeed;
         else this.speed = 0;
+        /*if(input.includes('w')&&input.indexOf('w')>input.indexOf('s')&&this.onGround()) this.speedY-=20;*/
+        this.y += this.speedY;
         //检测角色是否到达画布边界
         if (this.x<0) this.x=0;
         else if (this.x>this.game.width-this.width) this.x=this.game.width-this.width;    
         if (this.y<0) this.y=0;
         else if (this.y>this.game.height-this.height-this.game.groundMargin) this.y=this.game.height-this.height-this.game.groundMargin;
         
-        /*if(input.includes('w')&&input.indexOf('w')>input.indexOf('s')&&this.onGround()) this.speedY-=20;*/
-        this.y += this.speedY;
+        
         
         if (!this.onGround()) this.speedY +=this.gravity;
         else this.speedY=0;
@@ -73,7 +96,7 @@ export class Player{
         return this.y>=this.game.height-this.height-this.game.groundMargin;
     }
     setState(state){
-        //通过第23行代码被'.state.js'的handleInput执行
+        //通过第27行代码被'.state.js'的handleInput执行
         this.currentState=this.states[state];
         this.currentState.enter();
     }
