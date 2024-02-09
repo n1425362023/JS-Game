@@ -98,6 +98,7 @@ export class Player{
     setState(state){
         //通过第27行代码被'.state.js'的handleInput执行
         this.currentState=this.states[state];
+        console.log(this.states[state]);
         this.currentState.enter();
     }
 }

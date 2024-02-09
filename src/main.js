@@ -1,6 +1,7 @@
 import {Player} from './player.js'
 import {InputHandler} from './input.js'
 import {Background} from './background.js'
+import {GroundEnemy,FlyingEnemy,SpiderEnemy} from './enemy.js'
 window.addEventListener('load',function(){
     const loading=document.getElementById('loading');
     loading.style.display='none';
@@ -18,18 +19,37 @@ window.addEventListener('load',function(){
             this.player.currentState = this.player.states[0]
             this.player.currentState.enter();
             this.background = new Background(this)
-            
+            this.enemies=[];
+            this.enemyTimer=0;
+            this.enemyInterval=8000;
 
 
 
         }
         update(deltaTime){
             this.background.update(this.input.keys);
-            this.player.update(this.input.keys,deltaTime);     
+            this.player.update(this.input.keys,deltaTime);    
+            if (this.enemyTimer<this.enemyInterval){
+                this.enemyTimer+=deltaTime;
+                
+            }else{
+                this.addEnemy();
+                this.enemyTimer=0;
+            }
+            this.enemies.forEach(enemy=>{
+                enemy.update(deltaTime);
+            })
         }
         draw(context){
             this.background.draw(context);
             this.player.draw(context);
+            this.enemies.forEach(enemy=>{
+                enemy.draw(context);
+            })
+        }
+        addEnemy(){
+            this.enemies.push(new GroundEnemy(this));
+            console.log(game.enemies);
         }
     }
 
@@ -43,9 +63,8 @@ window.addEventListener('load',function(){
         ctx.clearRect(0,0,canvas.width,canvas.height);
         game.update(deltaTime);
         game.draw(ctx);
-        
+        console.log(game.enemyTimer);
         requestAnimationFrame(animate);
-       
     }
     animate();
 });

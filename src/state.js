@@ -43,9 +43,9 @@ export class StandingLeft extends State {
         }
     }
 }
-export class StandingRight extends State {
+export class StandingRight extends State {RIGHT
     constructor(player){
-        super('STANDINGLEFT');
+        super('STANDINGRIGHT');
         this.player = player;
     }
 
@@ -125,9 +125,9 @@ export class RunningLeft extends State {
     handleInput(input){
         if (input.includes('w')){
             this.player.setState(state.JUMPINGLEFT);
-        }else if(input.includes('s') && this.player.onGround()&&(input.indexOf('s')>input.indexOf('d')||(input.indexOf('s')>input.indexOf('d')))){
+        }else if(input.includes('s') && this.player.onGround()&&(input.indexOf('s')>input.indexOf('d'))){
             this.player.setState(state.SITTINGLEFT); 
-        }else if (input.includes('a')&&input.indexOf('a')>input.indexOf('d')){
+        }else if (input.includes('a')&&input.indexOf('a')>input.indexOf('d')&&input.indexOf('a')>input.indexOf('s')){
             this.player.setState(state.RUNNINGRIGHT);
         }else if (!input.includes('a')&&!input.includes('d')&&!input.includes('w')){
             this.player.setState(state.STANDINGLEFT); 
