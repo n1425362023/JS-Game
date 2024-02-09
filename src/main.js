@@ -21,7 +21,7 @@ window.addEventListener('load',function(){
             this.background = new Background(this)
             this.enemies=[];
             this.enemyTimer=0;
-            this.enemyInterval=8000;
+            this.enemyInterval=1000;
 
 
 
@@ -38,6 +38,8 @@ window.addEventListener('load',function(){
             }
             this.enemies.forEach(enemy=>{
                 enemy.update(deltaTime);
+                if (enemy.EnemyDeletion) this.enemies.splice(this.enemies.indexOf(enemy),1);
+                
             })
         }
         draw(context){
@@ -48,7 +50,8 @@ window.addEventListener('load',function(){
             })
         }
         addEnemy(){
-            this.enemies.push(new GroundEnemy(this));
+            if(Math.random()<0.2)this.enemies.push(new GroundEnemy(this));
+            if(Math.random()<0.5)this.enemies.push(new FlyingEnemy(this));
             console.log(game.enemies);
         }
     }
@@ -63,7 +66,6 @@ window.addEventListener('load',function(){
         ctx.clearRect(0,0,canvas.width,canvas.height);
         game.update(deltaTime);
         game.draw(ctx);
-        console.log(game.enemyTimer);
         requestAnimationFrame(animate);
     }
     animate();

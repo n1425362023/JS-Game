@@ -23,7 +23,6 @@ export class Player{
         this.frameX=0;
         this.frameY=0;
         this.MaxFrameX=5;
-        this.speed=0;
         this.maxSpeed=5;
         this.frameTimer=0;
         this.fps=15;
@@ -50,7 +49,7 @@ export class Player{
         //键盘输入控制角色
         if (input.includes('d')&&input.indexOf('d')>input.indexOf('a')) this.x+=this.maxSpeed;
         else if (input.includes('a')&&input.indexOf('a')>input.indexOf('d')) this.x-=this.maxSpeed;
-        else this.speed = 0;
+       
         /*if(input.includes('w')&&input.indexOf('w')>input.indexOf('s')&&this.onGround()) this.speedY-=20;*/
         this.y += this.speedY;
         //检测角色是否到达画布边界
@@ -98,7 +97,7 @@ export class Player{
     setState(state){
         //通过第27行代码被'.state.js'的handleInput执行
         this.currentState=this.states[state];
-        console.log(this.states[state]);
+        //console.log(this.states[state]);
         this.currentState.enter();
     }
 }
