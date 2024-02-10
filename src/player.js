@@ -54,7 +54,7 @@ export class Player{
         if (input.includes('d')&&input.indexOf('d')>input.indexOf('a')) this.x+=this.maxSpeed;
         else if (input.includes('a')&&input.indexOf('a')>input.indexOf('d')) this.x-=this.maxSpeed*1.5;
        
-        /*if(input.includes('w')&&input.indexOf('w')>input.indexOf('s')&&this.onGround()) this.speedY-=20;*/
+        if(input.includes('w')&&input.indexOf('w')>input.indexOf('s')&&this.onGround()) this.speedY-=20;
         this.y += this.speedY;
         //检测角色是否到达画布边界
         if (this.x<0) this.x=0;
@@ -88,7 +88,6 @@ export class Player{
         console.log(this.frameTimer)
         console.log(this.frameX);
         运行这个conso.log(frameTimer)显示NaN(非数字的值)，原因没找到*/
-        
         }
     draw(context){
          context.strokeRect(this.x,this.y,this.width,this.height);
@@ -99,9 +98,9 @@ export class Player{
         return this.y>=this.game.height-this.height-this.game.groundMargin;
     }
     setState(state){
-        //通过第27行代码被'.state.js'的handleInput执行
+        //通过第52行代码被'.state.js'的handleInput执行
         this.currentState=this.states[state];
         //console.log(this.states[state]);
-        this.currentState.enter();
+        this.currentState.enter(this.game);
     }
 }

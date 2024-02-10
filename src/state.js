@@ -26,7 +26,9 @@ export class StandingLeft extends State {
     }
 
    
-    enter(){
+    enter(game){
+        game.groundMargin=110;
+        this.player.frameX=0;
         this.player.MaxFrameX=6;
         this.player.frameY=0;
     }
@@ -51,7 +53,9 @@ export class StandingRight extends State {RIGHT
     }
 
    
-    enter(){
+    enter(game){
+        game.groundMargin=110;
+        this.player.frameX=0;
         this.player.MaxFrameX=6;
         this.player.frameY=1;
     }
@@ -76,7 +80,9 @@ export class SittingLeft extends State {
     }
 
    
-    enter(){
+    enter(game){
+        game.groundMargin=110;
+        this.player.frameX=0;
         this.player.MaxFrameX=4
         this.player.frameY=8;
     }
@@ -99,7 +105,9 @@ export class SittingRight extends State {
     }
 
    
-    enter(){
+    enter(game){
+        game.groundMargin=110;
+        this.player.frameX=0;
         this.player.MaxFrameX=4
         this.player.frameY=9;
     }
@@ -122,7 +130,9 @@ export class RunningLeft extends State {
     }
 
    
-    enter(){
+    enter(game){
+        game.groundMargin=110;
+        this.player.frameX=0;
         this.player.MaxFrameX=8;
         this.player.frameY=6;
         
@@ -149,7 +159,9 @@ export class RunningRight extends State {
     }
 
    
-    enter(){
+    enter(game){
+        game.groundMargin=110;
+        this.player.frameX=0;
         this.player.MaxFrameX=8;
         this.player.frameY=7;
         
@@ -176,10 +188,11 @@ export class JumpingLeft extends State {
     }
 
    
-    enter(){
-        
-        if(this.player.onGround()) this.player.speedY-=20;
+    enter(game){
+        game.groundMargin=110;
+        //if(this.player.onGround()) this.player.speedY-=20;
         //this.player.y += this.player.speedY;    // 错误代码：在一次跳跃函数只运行一次
+        this.player.frameX=0;
         this.player.MaxFrameX=6;
         this.player.frameY=2;
     }
@@ -200,10 +213,11 @@ export class JumpingRight extends State {
     }
 
    
-    enter(){
-        
-        if(this.player.onGround()) this.player.speedY-=20;
+    enter(game){
+        game.groundMargin=110;
+        //if(this.player.onGround()) this.player.speedY-=20;
         //this.player.y += this.player.speedY;    // 错误代码：在一次跳跃函数只运行一次
+        this.player.frameX=0;
         this.player.MaxFrameX=6;
         this.player.frameY=3;
     }
@@ -223,7 +237,9 @@ export class FallingLeft extends State {
         this.player = player;
     }
    
-    enter(){
+    enter(game){
+        game.groundMargin=110;
+        this.player.frameX=0;
         this.player.MaxFrameX=6;
         this.player.frameY=4;
     }
@@ -241,7 +257,9 @@ export class FallingRight extends State {
         this.player = player;
     }
    
-    enter(){
+    enter(game){
+        game.groundMargin=110;
+        this.player.frameX=0;
         this.player.MaxFrameX=6;
         this.player.frameY=5;
     }
@@ -259,14 +277,16 @@ export class ScrollingLeft extends State {
         this.player = player;
     }
    
-    enter(){
+    enter(game){
+        game.groundMargin=70;
+        this.player.frameX=0;
         this.player.MaxFrameX=6;
-        this.player.frameY=11;
+        this.player.frameY=10;
     }
     handleInput(input){
-        if(!input.indexOf('k')){
+        if(!input.includes('k')&&this.player.onGround()){
             this.player.setState(state.STANDINGLEFT);
-        }else if(!input.indexOf('k')&&!this.player.onGround()){
+        }else if(!input.includes('k')&&!this.player.onGround()){
             this.player.setState(state.FALLINGLEFT);
         }
     }
@@ -277,14 +297,16 @@ export class ScrollingRight extends State {
         this.player = player;
     }
    
-    enter(){
+    enter(game){
+        game.groundMargin=70;
+        this.player.frameX=0;
         this.player.MaxFrameX=6;
-        this.player.frameY=12;
+        this.player.frameY=11;
     }
     handleInput(input){
-        if(!input.indexOf('k')&&this.player.onGround()){    
+        if(!input.includes('k')&&this.player.onGround()){    
             this.player.setState(state.STANDINGRIGHT);
-        }else if(!input.indexOf('k')&&!this.player.onGround()){
+        }else if(!input.includes('k')&&!this.player.onGround()){
             this.player.setState(state.FALLINGRIGHT);
         }
     }

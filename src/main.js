@@ -15,15 +15,15 @@ window.addEventListener('load',function(){
             this.width=width;
             this.height=height;
             this.groundMargin=110;                //方便设置角色在屏幕的位置
-            this.player = new Player(this);
-            this.input=new InputHandler(this);
-            this.player.currentState = this.player.states[0]
-            this.player.currentState.enter();
-            this.background = new Background(this)
             this.enemies=[];
             this.enemyTimer=0;
             this.enemyInterval=1000;
             this.score=0;
+            this.player = new Player(this);
+            this.input=new InputHandler(this);
+            this.player.currentState = this.player.states[0]
+            this.player.currentState.enter(this);
+            this.background = new Background(this)
             this.UI=new UI(this);
             this.fontColor='black';
 
@@ -53,7 +53,6 @@ window.addEventListener('load',function(){
                 enemy.draw(context);
             })
             this.UI.draw(context);
-            console.log(this.UI);
             
         }
         addEnemy(){
