@@ -9,7 +9,8 @@ const state = {
     JUMPINGRIGHT:       7,
     FALLINGLEFT:        8,
     FALLINGRIGHT:       9,
-    SCROLLING:          10
+    SCROLLINGLEFT:      10,
+    SCROLLINGRIGHT:     11
 }
 class State {
     constructor(state){
@@ -38,8 +39,8 @@ export class StandingLeft extends State {
             this.player.setState(state.JUMPINGLEFT);
         }else if(input.includes('s') && this.player.onGround()){
             this.player.setState(state.SITTINGLEFT);
-        }else if (input.includes('s') && !this.player.onGround()){
-            this.player.setState(state.FALLING);
+        }else if (input.includes('k')){
+            this.player.setState(state.SCROLLINGLEFT);
         }
     }
 }
@@ -63,8 +64,8 @@ export class StandingRight extends State {RIGHT
             this.player.setState(state.JUMPINGRIGHT);
         }else if(input.includes('s') && this.player.onGround()){
             this.player.setState(state.SITTINGRIGHT);
-        }else if (input.includes('s') && !this.player.onGround()){
-            this.player.setState(state.FALLING);
+        }else if (input.includes('k')){
+            this.player.setState(state.SCROLLINGRIGHT);
         }
     }
 }
@@ -86,6 +87,8 @@ export class SittingLeft extends State {
             this.player.setState(state.RUNNINGRIGHT);
         }else if (input.includes('w')){
             this.player.setState(state.JUMPINGLEFT);
+        }else if (input.includes('k')){
+            this.player.setState(state.SCROLLINGLEFT);
         }
     }
 }
@@ -107,6 +110,8 @@ export class SittingRight extends State {
             this.player.setState(state.RUNNINGLEFT);
         }else if (input.includes('w')){
             this.player.setState(state.JUMPINGRIGHT);
+        }else if (input.includes('k')){
+            this.player.setState(state.SCROLLINGRIGHT);
         }
     }
 }
@@ -131,6 +136,8 @@ export class RunningLeft extends State {
             this.player.setState(state.RUNNINGRIGHT);
         }else if (!input.includes('a')&&!input.includes('d')&&!input.includes('w')){
             this.player.setState(state.STANDINGLEFT); 
+        }else if (input.includes('k')){
+            this.player.setState(state.SCROLLINGLEFT);
         }
     }
             
@@ -156,6 +163,8 @@ export class RunningRight extends State {
             this.player.setState(state.RUNNINGLEFT);
         }else if (!input.includes('a')&&!input.includes('d')&&!input.includes('w')){
             this.player.setState(state.STANDINGRIGHT); 
+        }else if (input.includes('k')){
+            this.player.setState(state.SCROLLINGRIGHT);
         }
     }
             
@@ -179,6 +188,8 @@ export class JumpingLeft extends State {
             this.player.setState(state.FALLINGLEFT);
         }else if (input.includes('a')&&input.indexOf('a')>input.indexOf('d')&&!this.player.onGround()){
             this.player.setState(state.FALLINGRIGHT);
+        }else if (input.includes('k')){
+            this.player.setState(state.SCROLLINGLEFT);
         }
     }
 }
@@ -201,12 +212,14 @@ export class JumpingRight extends State {
             this.player.setState(state.FALLINGRIGHT);
         }else if (input.includes('d')&&input.indexOf('d')>input.indexOf('a')&&!this.player.onGround()){
             this.player.setState(state.FALLINGLEFT);
+        }else if (input.includes('k')){
+            this.player.setState(state.SCROLLINGRIGHT);
         }
     }
 }
 export class FallingLeft extends State {
     constructor(player){
-        super('FALLING');
+        super('FALLINGLEFT');
         this.player = player;
     }
    
@@ -217,12 +230,14 @@ export class FallingLeft extends State {
     handleInput(input){
         if (this.player.onGround()){
             this.player.setState(state.RUNNINGLEFT);
+        }else if (input.includes('k')){
+            this.player.setState(state.SCROLLINGLEFT);
         }
     }
 }
 export class FallingRight extends State {
     constructor(player){
-        super('FALLING');
+        super('FALLINGRIGHT');
         this.player = player;
     }
    
@@ -233,6 +248,44 @@ export class FallingRight extends State {
     handleInput(input){
         if (this.player.onGround()){
             this.player.setState(state.RUNNINGRIGHT);
+        }else if (input.includes('k')){
+            this.player.setState(state.SCROLLINGRIGHT);
+        }
+    }
+}
+export class ScrollingLeft extends State {
+    constructor(player){
+        super('SCROLLINGLEFT');
+        this.player = player;
+    }
+   
+    enter(){
+        this.player.MaxFrameX=6;
+        this.player.frameY=11;
+    }
+    handleInput(input){
+        if(!input.indexOf('k')){
+            this.player.setState(state.STANDINGLEFT);
+        }else if(!input.indexOf('k')&&!this.player.onGround()){
+            this.player.setState(state.FALLINGLEFT);
+        }
+    }
+}
+export class ScrollingRight extends State {
+    constructor(player){
+        super('SCROLLINGRIGHT');
+        this.player = player;
+    }
+   
+    enter(){
+        this.player.MaxFrameX=6;
+        this.player.frameY=12;
+    }
+    handleInput(input){
+        if(!input.indexOf('k')&&this.player.onGround()){    
+            this.player.setState(state.STANDINGRIGHT);
+        }else if(!input.indexOf('k')&&!this.player.onGround()){
+            this.player.setState(state.FALLINGRIGHT);
         }
     }
 }

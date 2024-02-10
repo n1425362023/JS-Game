@@ -8,6 +8,7 @@ export class InputHandler{
             e.key === 's'|| 
             e.key === 'd'||
             e.key === 'j'||
+            e.key === 'k'||
             e.key === 'p')&&
             this.keys.indexOf(e.key) === -1
             ){
@@ -20,6 +21,7 @@ export class InputHandler{
             e.key === 's'|| 
             e.key === 'd'||
             e.key === 'j'||
+            e.key === 'k'||
             e.key === 'p'){
                 this.keys.splice(this.keys.indexOf(e.key), 1);
             }

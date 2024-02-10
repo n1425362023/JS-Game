@@ -8,7 +8,9 @@ import {
     JumpingLeft,
     JumpingRight,
     FallingLeft,
-    FallingRight 
+    FallingRight,
+    ScrollingLeft,
+    ScrollingRight 
 } from './state.js';
 export class Player{
     constructor(game){
@@ -39,7 +41,9 @@ export class Player{
             new JumpingLeft(this),
             new JumpingRight(this),
             new FallingLeft(this),
-            new FallingRight(this)
+            new FallingRight(this),
+            new ScrollingLeft(this),
+            new ScrollingRight(this)
         ]
         this.currentState=null;
     }
