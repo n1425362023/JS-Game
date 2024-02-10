@@ -25,7 +25,7 @@ window.addEventListener('load',function(){
             this.enemyInterval=1000;
             this.score=0;
             this.UI=new UI(this);
-            this.fontColor='red';
+            this.fontColor='black';
 
 
         }
