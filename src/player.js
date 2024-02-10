@@ -48,7 +48,7 @@ export class Player{
         this.currentState.handleInput(input);
         //键盘输入控制角色
         if (input.includes('d')&&input.indexOf('d')>input.indexOf('a')) this.x+=this.maxSpeed;
-        else if (input.includes('a')&&input.indexOf('a')>input.indexOf('d')) this.x-=this.maxSpeed;
+        else if (input.includes('a')&&input.indexOf('a')>input.indexOf('d')) this.x-=this.maxSpeed*1.5;
        
         /*if(input.includes('w')&&input.indexOf('w')>input.indexOf('s')&&this.onGround()) this.speedY-=20;*/
         this.y += this.speedY;
@@ -81,13 +81,13 @@ export class Player{
             
         }
         console.log(deltaTime);
-        console.log(this.frameTimer);
+        console.log(this.frameTimer)
         console.log(this.frameX);
         运行这个conso.log(frameTimer)显示NaN(非数字的值)，原因没找到*/
         
         }
     draw(context){
-         
+         context.strokeRect(this.x,this.y,this.width,this.height);
         context.drawImage(this.image,this.frameX*this.width,this.frameY*this.height,this.width,this.height,this.x,this.y,this.width,this.height);
     }   
   

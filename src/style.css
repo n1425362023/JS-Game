@@ -17,7 +17,7 @@ body {
     border:5px solid black;
     
 }
-#player,#background1,#background2,#background3,#background4,#background5,#GroundEnemy,#FlyingEnemy,#SpiderEnemy{
+#player,#background1,#background2,#background3,#background4,#background5,#GroundEnemy,#FlyingEnemy,#ZombieEnemy{
     display: none;
 }
    

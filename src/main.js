@@ -1,7 +1,8 @@
 import {Player} from './player.js'
 import {InputHandler} from './input.js'
 import {Background} from './background.js'
-import {GroundEnemy,FlyingEnemy,SpiderEnemy} from './enemy.js'
+import {GroundEnemy,FlyingEnemy,ZombieEnemy} from './enemy.js'
+import {UI} from './UI.js'
 window.addEventListener('load',function(){
     const loading=document.getElementById('loading');
     loading.style.display='none';
@@ -22,7 +23,9 @@ window.addEventListener('load',function(){
             this.enemies=[];
             this.enemyTimer=0;
             this.enemyInterval=1000;
-
+            this.score=0;
+            this.UI=new UI(this);
+            this.fontColor='red';
 
 
         }
@@ -43,16 +46,21 @@ window.addEventListener('load',function(){
             })
         }
         draw(context){
+            
             this.background.draw(context);
             this.player.draw(context);
             this.enemies.forEach(enemy=>{
                 enemy.draw(context);
             })
+            this.UI.draw(context);
+            console.log(this.UI);
+            
         }
         addEnemy(){
-            if(Math.random()<0.2)this.enemies.push(new GroundEnemy(this));
+            if(Math.random()<0.2?1:0)this.enemies.push(new GroundEnemy(this));
+            else if(Math.random()<0.2?1:0) this.enemies.push(new ZombieEnemy(this));
             if(Math.random()<0.5)this.enemies.push(new FlyingEnemy(this));
-            console.log(game.enemies);
+            //console.log(game.enemies);
         }
     }
 
