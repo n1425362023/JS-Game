@@ -57,10 +57,19 @@ export class Player{
         if(input.includes('w')&&input.indexOf('w')>input.indexOf('s')&&this.onGround()) this.speedY-=20;
         this.y += this.speedY;
         //检测角色是否到达画布边界
-        if (this.x<0) this.x=0;
-        else if (this.x>this.game.width-this.width) this.x=this.game.width-this.width;    
-        if (this.y<0) this.y=0;
-        else if (this.y>this.game.height-this.height-this.game.groundMargin) this.y=this.game.height-this.height-this.game.groundMargin;
+        
+        
+        if(this.game.score==0){
+            if (this.x<0) this.x=0;
+            else if (this.x>this.game.width*2/3) this.x=this.game.width*2/3;    
+            if (this.y<0) this.y=0;
+            else if (this.y>this.game.height-this.height-this.game.groundMargin) this.y=this.game.height-this.height-this.game.groundMargin;
+        }else if(this.game.score>=30){
+            if (this.x<0) this.x=0;
+            else if (this.x>this.game.width-this.width) this.x=this.game.width-this.width;    
+            if (this.y<0) this.y=0;
+            else if (this.y>this.game.height-this.height-this.game.groundMargin) this.y=this.game.height-this.height-this.game.groundMargin;
+        }
         
         
         
@@ -90,7 +99,7 @@ export class Player{
         运行这个conso.log(frameTimer)显示NaN(非数字的值)，原因没找到*/
         }
     draw(context){
-         context.strokeRect(this.x,this.y,this.width,this.height);
+        //context.strokeRect(this.x,this.y,this.width,this.height);
         context.drawImage(this.image,this.frameX*this.width,this.frameY*this.height,this.width,this.height,this.x,this.y,this.width,this.height);
     }   
   

@@ -19,6 +19,7 @@ window.addEventListener('load',function(){
             this.enemyTimer=0;
             this.enemyInterval=1000;
             this.score=0;
+            this.particles=[];
             this.player = new Player(this);
             this.input=new InputHandler(this);
             this.player.currentState = this.player.states[0]
@@ -56,8 +57,8 @@ window.addEventListener('load',function(){
             
         }
         addEnemy(){
-            if(Math.random()<0.2?1:0)this.enemies.push(new GroundEnemy(this));
-            else if(Math.random()<0.2?1:0) this.enemies.push(new ZombieEnemy(this));
+            if(Math.random()<0.1)this.enemies.push(new GroundEnemy(this));
+            else if(Math.random()<0.1) this.enemies.push(new ZombieEnemy(this));
             if(Math.random()<0.5)this.enemies.push(new FlyingEnemy(this));
             //console.log(game.enemies);
         }
@@ -75,5 +76,5 @@ window.addEventListener('load',function(){
         game.draw(ctx);
         requestAnimationFrame(animate);
     }
-    animate();
+    animate(0);
 });
