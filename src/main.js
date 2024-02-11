@@ -19,7 +19,7 @@ window.addEventListener('load',function(){
             this.enemyTimer=0;
             this.enemyInterval=1000;
             this.score=0;
-            this.particles=[];
+            this.attack=[];
             this.player = new Player(this);
             this.input=new InputHandler(this);
             this.player.currentState = this.player.states[0]
@@ -45,6 +45,11 @@ window.addEventListener('load',function(){
                 if (enemy.EnemyDeletion) this.enemies.splice(this.enemies.indexOf(enemy),1);
                 
             })
+            this.attack.forEach(attack=>{
+                attack.update();
+                if (attack.HitDeletion) this.attack.splice(this.attack.indexOf(attack),1);
+                console.log(isNaN(attack.x));
+            })
         }
         draw(context){
             
@@ -52,6 +57,9 @@ window.addEventListener('load',function(){
             this.player.draw(context);
             this.enemies.forEach(enemy=>{
                 enemy.draw(context);
+            })
+            this.attack.forEach(attack=>{
+                attack.draw(context);
             })
             this.UI.draw(context);
             

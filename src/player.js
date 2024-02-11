@@ -17,7 +17,7 @@ export class Player{
         this.game=game;
         this.width=200;
         this.height=182;
-        this.x=0;
+        this.x=this.game.width-this.width/2;
         this.y=this.game.height-this.height-this.game.groundMargin;
         this.speedY=5;
         this.gravity=0.5;
@@ -25,6 +25,7 @@ export class Player{
         this.frameX=0;
         this.frameY=0;
         this.MaxFrameX=5;
+        this.direction=1;
         this.maxSpeed=5;
         this.frameTimer=0;
         this.fps=15;
@@ -49,10 +50,15 @@ export class Player{
     }
     update(input,deltaTime){
         //默认角色初始状态
-        this.currentState.handleInput(input);
+        this.currentState.handleInput(input,this.game);
         //键盘输入控制角色
-        if (input.includes('d')&&input.indexOf('d')>input.indexOf('a')) this.x+=this.maxSpeed;
-        else if (input.includes('a')&&input.indexOf('a')>input.indexOf('d')) this.x-=this.maxSpeed*1.5;
+        if (input.includes('d')&&input.indexOf('d')>input.indexOf('a')){
+            this.x+=this.maxSpeed;
+            this.direction=1;
+        }  else if (input.includes('a')&&input.indexOf('a')>input.indexOf('d')){
+            this.x-=this.maxSpeed*1.5;
+            this.direction=-1.5;
+        } 
        
         if(input.includes('w')&&input.indexOf('w')>input.indexOf('s')&&this.onGround()) this.speedY-=20;
         this.y += this.speedY;
@@ -107,7 +113,7 @@ export class Player{
         return this.y>=this.game.height-this.height-this.game.groundMargin;
     }
     setState(state){
-        //通过第52行代码被'.state.js'的handleInput执行
+        //通过第53行代码被'.state.js'的handleInput执行
         this.currentState=this.states[state];
         //console.log(this.states[state]);
         this.currentState.enter(this.game);

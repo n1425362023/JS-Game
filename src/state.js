@@ -1,3 +1,4 @@
+import {Hit} from './hit.js';
 const state = {
     STANDINGLEFT:       0,
     STANDINGRIGHT:      1,
@@ -32,7 +33,10 @@ export class StandingLeft extends State {
         this.player.MaxFrameX=6;
         this.player.frameY=0;
     }
-    handleInput(input){
+    handleInput(input,game){
+        if(input.includes('j')){
+            this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+        }
         if((input.includes('d'))&&input.indexOf('d')>input.indexOf('a')&&input.indexOf('s')<input.indexOf('d')){
             this.player.setState(state.RUNNINGLEFT);
         }else if((input.includes('a'))&&input.indexOf('a')>input.indexOf('d')&&input.indexOf('s')<input.indexOf('a')){
@@ -59,7 +63,10 @@ export class StandingRight extends State {RIGHT
         this.player.MaxFrameX=6;
         this.player.frameY=1;
     }
-    handleInput(input){
+    handleInput(input,game){
+        if(input.includes('j')){
+            game.attack.push(new Hit(game.player,game.player.x,game.player.y));
+        }
         if((input.includes('d'))&&input.indexOf('d')>input.indexOf('a')&&input.indexOf('s')<input.indexOf('d')){
             this.player.setState(state.RUNNINGLEFT);
         }else if((input.includes('a'))&&input.indexOf('a')>input.indexOf('d')&&input.indexOf('s')<input.indexOf('a')){
@@ -86,7 +93,10 @@ export class SittingLeft extends State {
         this.player.MaxFrameX=4
         this.player.frameY=8;
     }
-    handleInput(input){
+    handleInput(input,game){
+        if(input.includes('j')){
+            this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+        }
         if(input.includes('d')&&(input.indexOf('s')<input.indexOf('d'))){
             this.player.setState(state.RUNNINGLEFT);
         }else if((input.includes('a')&&(input.indexOf('s')<input.indexOf('a')))){
@@ -111,7 +121,10 @@ export class SittingRight extends State {
         this.player.MaxFrameX=4
         this.player.frameY=9;
     }
-    handleInput(input){
+    handleInput(input,game){
+        if(input.includes('j')){
+            this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+        }
         if(input.includes('a')&&(input.indexOf('s')<input.indexOf('a'))){
             this.player.setState(state.RUNNINGRIGHT);
         }else if(input.includes('d')&&(input.indexOf('s')<input.indexOf('d'))){
@@ -137,7 +150,10 @@ export class RunningLeft extends State {
         this.player.frameY=6;
         
     }
-    handleInput(input){
+    handleInput(input,game){
+        if(input.includes('j')){
+            this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+        }
         if (input.includes('w')){
             this.player.setState(state.JUMPINGLEFT);
         }else if(input.includes('s') && this.player.onGround()&&(input.indexOf('s')>input.indexOf('d'))){
@@ -166,7 +182,10 @@ export class RunningRight extends State {
         this.player.frameY=7;
         
     }
-    handleInput(input){
+    handleInput(input,game){
+        if(input.includes('j')){
+            this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+        }
         if (input.includes('w')){
             this.player.setState(state.JUMPINGRIGHT);
         }else if(input.includes('s') && this.player.onGround()&&(input.indexOf('s')>input.indexOf('a')||(input.indexOf('s')>input.indexOf('d')))){
@@ -196,7 +215,10 @@ export class JumpingLeft extends State {
         this.player.MaxFrameX=6;
         this.player.frameY=2;
     }
-    handleInput(input){
+    handleInput(input,game){
+        if(input.includes('j')){
+            this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+        }
         if (this.player.speedY > this.player.gravity){
             this.player.setState(state.FALLINGLEFT);
         }else if (input.includes('a')&&input.indexOf('a')>input.indexOf('d')&&!this.player.onGround()){
@@ -221,7 +243,10 @@ export class JumpingRight extends State {
         this.player.MaxFrameX=6;
         this.player.frameY=3;
     }
-    handleInput(input){
+    handleInput(input,game){
+        if(input.includes('j')){
+            this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+        }
         if (this.player.speedY > this.player.gravity){
             this.player.setState(state.FALLINGRIGHT);
         }else if (input.includes('d')&&input.indexOf('d')>input.indexOf('a')&&!this.player.onGround()){
@@ -243,7 +268,10 @@ export class FallingLeft extends State {
         this.player.MaxFrameX=6;
         this.player.frameY=4;
     }
-    handleInput(input){
+    handleInput(input,game){
+        if(input.includes('j')){
+            this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+        }
         if (this.player.onGround()){
             this.player.setState(state.RUNNINGLEFT);
         }else if (input.includes('k')){
@@ -263,7 +291,10 @@ export class FallingRight extends State {
         this.player.MaxFrameX=6;
         this.player.frameY=5;
     }
-    handleInput(input){
+    handleInput(input,game){
+        if(input.includes('j')){
+            this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+        }
         if (this.player.onGround()){
             this.player.setState(state.RUNNINGRIGHT);
         }else if (input.includes('k')){
