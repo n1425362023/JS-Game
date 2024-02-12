@@ -17,7 +17,7 @@ export class Player{
         this.game=game;
         this.width=200;
         this.height=182;
-        this.x=this.game.width-this.width/2;
+        this.x=0;
         this.y=this.game.height-this.height-this.game.groundMargin;
         this.speedY=5;
         this.gravity=0.5;
@@ -115,7 +115,7 @@ export class Player{
     setState(state){
         //通过第53行代码被'.state.js'的handleInput执行
         this.currentState=this.states[state];
-        //console.log(this.states[state]);
+        console.log(this.states[state]);
         this.currentState.enter(this.game);
     }
 }

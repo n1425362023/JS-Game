@@ -29,18 +29,21 @@ export class StandingLeft extends State {
    
     enter(game){
         game.groundMargin=110;
+        this.player.maxSpeed=5;
         this.player.frameX=0;
         this.player.MaxFrameX=6;
-        this.player.frameY=0;
+        this.player.frameY=1;
     }
     handleInput(input,game){
-        if(input.includes('j')){
-            this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+        if(input.includes('j')&&game.attack.length<3){
+            for (var i=0; i<3; i++){
+                this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+            }
         }
-        if((input.includes('d'))&&input.indexOf('d')>input.indexOf('a')&&input.indexOf('s')<input.indexOf('d')){
-            this.player.setState(state.RUNNINGLEFT);
-        }else if((input.includes('a'))&&input.indexOf('a')>input.indexOf('d')&&input.indexOf('s')<input.indexOf('a')){
+        if((input.includes('d'))&&input.indexOf('d')>input.indexOf('a')&&input.indexOf('d')>input.indexOf('s')){
             this.player.setState(state.RUNNINGRIGHT);
+        }else if((input.includes('a'))&&input.indexOf('a')>input.indexOf('d')&&input.indexOf('a')>input.indexOf('s')){
+            this.player.setState(state.RUNNINGLEFT);
         }else if (input.includes('w')){
             this.player.setState(state.JUMPINGLEFT);
         }else if(input.includes('s') && this.player.onGround()){
@@ -59,18 +62,21 @@ export class StandingRight extends State {RIGHT
    
     enter(game){
         game.groundMargin=110;
+        this.player.maxSpeed=5;
         this.player.frameX=0;
         this.player.MaxFrameX=6;
-        this.player.frameY=1;
+        this.player.frameY=0;
     }
     handleInput(input,game){
-        if(input.includes('j')){
-            game.attack.push(new Hit(game.player,game.player.x,game.player.y));
+        if(input.includes('j')&&game.attack.length<3){
+            for (var i=0; i<3; i++){
+                this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+            }
         }
-        if((input.includes('d'))&&input.indexOf('d')>input.indexOf('a')&&input.indexOf('s')<input.indexOf('d')){
-            this.player.setState(state.RUNNINGLEFT);
-        }else if((input.includes('a'))&&input.indexOf('a')>input.indexOf('d')&&input.indexOf('s')<input.indexOf('a')){
+        if(input.includes('d')&&input.indexOf('d')>input.indexOf('a')&&input.indexOf('d')>input.indexOf('s')){
             this.player.setState(state.RUNNINGRIGHT);
+        }else if((input.includes('a'))&&input.indexOf('a')>input.indexOf('d')&&input.indexOf('a')>input.indexOf('s')){
+            this.player.setState(state.RUNNINGLEFT);
         }else if (input.includes('w')){
             this.player.setState(state.JUMPINGRIGHT);
         }else if(input.includes('s') && this.player.onGround()){
@@ -89,18 +95,21 @@ export class SittingLeft extends State {
    
     enter(game){
         game.groundMargin=110;
+        this.player.maxSpeed=5;
         this.player.frameX=0;
         this.player.MaxFrameX=4
-        this.player.frameY=8;
+        this.player.frameY=9;
     }
     handleInput(input,game){
-        if(input.includes('j')){
-            this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+        if(input.includes('j')&&game.attack.length<3){
+            for (var i=0; i<3; i++){
+                this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+            }
         }
         if(input.includes('d')&&(input.indexOf('s')<input.indexOf('d'))){
-            this.player.setState(state.RUNNINGLEFT);
-        }else if((input.includes('a')&&(input.indexOf('s')<input.indexOf('a')))){
             this.player.setState(state.RUNNINGRIGHT);
+        }else if((input.includes('a')&&(input.indexOf('s')<input.indexOf('a')))){
+            this.player.setState(state.RUNNINGLEFT);
         }else if (input.includes('w')){
             this.player.setState(state.JUMPINGLEFT);
         }else if (input.includes('k')){
@@ -117,18 +126,21 @@ export class SittingRight extends State {
    
     enter(game){
         game.groundMargin=110;
+        this.player.maxSpeed=5;
         this.player.frameX=0;
         this.player.MaxFrameX=4
-        this.player.frameY=9;
+        this.player.frameY=8;
     }
     handleInput(input,game){
-        if(input.includes('j')){
-            this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+        if(input.includes('j')&&game.attack.length<3){
+            for (var i=0; i<3; i++){
+                this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+            }
         }
         if(input.includes('a')&&(input.indexOf('s')<input.indexOf('a'))){
-            this.player.setState(state.RUNNINGRIGHT);
-        }else if(input.includes('d')&&(input.indexOf('s')<input.indexOf('d'))){
             this.player.setState(state.RUNNINGLEFT);
+        }else if(input.includes('d')&&(input.indexOf('s')<input.indexOf('d'))){
+            this.player.setState(state.RUNNINGRIGHT);
         }else if (input.includes('w')){
             this.player.setState(state.JUMPINGRIGHT);
         }else if (input.includes('k')){
@@ -145,20 +157,23 @@ export class RunningLeft extends State {
    
     enter(game){
         game.groundMargin=110;
+        this.player.maxSpeed=5;
         this.player.frameX=0;
         this.player.MaxFrameX=8;
-        this.player.frameY=6;
+        this.player.frameY=7;
         
     }
     handleInput(input,game){
-        if(input.includes('j')){
-            this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+        if(input.includes('j')&&game.attack.length<3){
+            for (var i=0; i<3; i++){
+                this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+            }
         }
         if (input.includes('w')){
             this.player.setState(state.JUMPINGLEFT);
         }else if(input.includes('s') && this.player.onGround()&&(input.indexOf('s')>input.indexOf('d'))){
             this.player.setState(state.SITTINGLEFT); 
-        }else if (input.includes('a')&&input.indexOf('a')>input.indexOf('d')&&input.indexOf('a')>input.indexOf('s')){
+        }else if (input.includes('d')&&input.indexOf('d')>input.indexOf('a')&&input.indexOf('d')>input.indexOf('s')){
             this.player.setState(state.RUNNINGRIGHT);
         }else if (!input.includes('a')&&!input.includes('d')&&!input.includes('w')){
             this.player.setState(state.STANDINGLEFT); 
@@ -177,20 +192,23 @@ export class RunningRight extends State {
    
     enter(game){
         game.groundMargin=110;
+        this.player.maxSpeed=5;
         this.player.frameX=0;
         this.player.MaxFrameX=8;
-        this.player.frameY=7;
+        this.player.frameY=6;
         
     }
     handleInput(input,game){
-        if(input.includes('j')){
-            this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+        if(input.includes('j')&&game.attack.length<3){
+            for (var i=0; i<3; i++){
+                this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+            }
         }
         if (input.includes('w')){
             this.player.setState(state.JUMPINGRIGHT);
         }else if(input.includes('s') && this.player.onGround()&&(input.indexOf('s')>input.indexOf('a')||(input.indexOf('s')>input.indexOf('d')))){
             this.player.setState(state.SITTINGRIGHT); 
-        }else if (input.includes('d')&&input.indexOf('d')>input.indexOf('a')){
+        }else if (input.includes('a')&&input.indexOf('a')>input.indexOf('d')&&input.indexOf('a')>input.indexOf('s')){
             this.player.setState(state.RUNNINGLEFT);
         }else if (!input.includes('a')&&!input.includes('d')&&!input.includes('w')){
             this.player.setState(state.STANDINGRIGHT); 
@@ -211,18 +229,21 @@ export class JumpingLeft extends State {
         game.groundMargin=110;
         //if(this.player.onGround()) this.player.speedY-=20;
         //this.player.y += this.player.speedY;    // 错误代码：在一次跳跃函数只运行一次
+        this.player.maxSpeed=5;
         this.player.frameX=0;
         this.player.MaxFrameX=6;
-        this.player.frameY=2;
+        this.player.frameY=3;
     }
     handleInput(input,game){
-        if(input.includes('j')){
-            this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+        if(input.includes('j')&&game.attack.length<3){
+            for (var i=0; i<3; i++){
+                this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+            }
         }
         if (this.player.speedY > this.player.gravity){
             this.player.setState(state.FALLINGLEFT);
         }else if (input.includes('a')&&input.indexOf('a')>input.indexOf('d')&&!this.player.onGround()){
-            this.player.setState(state.FALLINGRIGHT);
+            this.player.setState(state.FALLINGLEFT);
         }else if (input.includes('k')){
             this.player.setState(state.SCROLLINGLEFT);
         }
@@ -239,18 +260,21 @@ export class JumpingRight extends State {
         game.groundMargin=110;
         //if(this.player.onGround()) this.player.speedY-=20;
         //this.player.y += this.player.speedY;    // 错误代码：在一次跳跃函数只运行一次
+        this.player.maxSpeed=5;
         this.player.frameX=0;
         this.player.MaxFrameX=6;
-        this.player.frameY=3;
+        this.player.frameY=2;
     }
     handleInput(input,game){
-        if(input.includes('j')){
-            this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+        if(input.includes('j')&&game.attack.length<3){
+            for (var i=0; i<3; i++){
+                this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+            }
         }
         if (this.player.speedY > this.player.gravity){
             this.player.setState(state.FALLINGRIGHT);
         }else if (input.includes('d')&&input.indexOf('d')>input.indexOf('a')&&!this.player.onGround()){
-            this.player.setState(state.FALLINGLEFT);
+            this.player.setState(state.FALLINGRIGHT);
         }else if (input.includes('k')){
             this.player.setState(state.SCROLLINGRIGHT);
         }
@@ -264,18 +288,23 @@ export class FallingLeft extends State {
    
     enter(game){
         game.groundMargin=110;
+        this.player.maxSpeed=5;
         this.player.frameX=0;
         this.player.MaxFrameX=6;
-        this.player.frameY=4;
+        this.player.frameY=5;
     }
     handleInput(input,game){
-        if(input.includes('j')){
-            this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+        if(input.includes('j')&&game.attack.length<3){
+            for (var i=0; i<3; i++){
+                this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+            }
         }
         if (this.player.onGround()){
             this.player.setState(state.RUNNINGLEFT);
         }else if (input.includes('k')){
             this.player.setState(state.SCROLLINGLEFT);
+        }else if (input.includes('d')&&input.indexOf('d')>input.indexOf('a')&&!this.player.onGround()){
+            this.player.setState(state.FALLINGRIGHT);
         }
     }
 }
@@ -287,18 +316,23 @@ export class FallingRight extends State {
    
     enter(game){
         game.groundMargin=110;
+        this.player.maxSpeed=5;
         this.player.frameX=0;
         this.player.MaxFrameX=6;
-        this.player.frameY=5;
+        this.player.frameY=4;
     }
     handleInput(input,game){
-        if(input.includes('j')){
-            this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+        if(input.includes('j')&&game.attack.length<3){
+            for (var i=0; i<3; i++){
+                this.player.game.attack.push(new Hit(this.player,this.player.x,this.player.y));
+            }
         }
         if (this.player.onGround()){
             this.player.setState(state.RUNNINGRIGHT);
         }else if (input.includes('k')){
             this.player.setState(state.SCROLLINGRIGHT);
+        }else if(input.includes('a')&&input.indexOf('a')>input.indexOf('d')&&!this.player.onGround()){
+            this.player.setState(state.FALLINGLEFT);
         }
     }
 }
@@ -310,9 +344,10 @@ export class ScrollingLeft extends State {
    
     enter(game){
         game.groundMargin=70;
+        this.player.maxSpeed=7;
         this.player.frameX=0;
         this.player.MaxFrameX=6;
-        this.player.frameY=10;
+        this.player.frameY=11;
     }
     handleInput(input){
         if(!input.includes('k')&&this.player.onGround()){
@@ -330,9 +365,10 @@ export class ScrollingRight extends State {
    
     enter(game){
         game.groundMargin=70;
+        this.player.maxSpeed=8;
         this.player.frameX=0;
         this.player.MaxFrameX=6;
-        this.player.frameY=11;
+        this.player.frameY=10;
     }
     handleInput(input){
         if(!input.includes('k')&&this.player.onGround()){    

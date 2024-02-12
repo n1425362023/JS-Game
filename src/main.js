@@ -22,7 +22,7 @@ window.addEventListener('load',function(){
             this.attack=[];
             this.player = new Player(this);
             this.input=new InputHandler(this);
-            this.player.currentState = this.player.states[0]
+            this.player.currentState = this.player.states[1];
             this.player.currentState.enter(this);
             this.background = new Background(this)
             this.UI=new UI(this);
@@ -48,7 +48,6 @@ window.addEventListener('load',function(){
             this.attack.forEach(attack=>{
                 attack.update();
                 if (attack.HitDeletion) this.attack.splice(this.attack.indexOf(attack),1);
-                console.log(isNaN(attack.x));
             })
         }
         draw(context){
