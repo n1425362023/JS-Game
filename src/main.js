@@ -3,6 +3,7 @@ import {InputHandler} from './input.js'
 import {Background} from './background.js'
 import {GroundEnemy,FlyingEnemy,ZombieEnemy} from './enemy.js'
 import {UI} from './UI.js'
+
 window.addEventListener('load',function(){
     const loading=document.getElementById('loading');
     loading.style.display='none';
@@ -12,6 +13,8 @@ window.addEventListener('load',function(){
     canvas.height=window.innerHeight;
     class Game{
         constructor(width,height){
+            this.life =5;
+            this.gameOver=false;
             this.width=width;
             this.height=height;
             this.groundMargin=110;                //方便设置角色在屏幕的位置
@@ -20,6 +23,7 @@ window.addEventListener('load',function(){
             this.enemyInterval=1000;
             this.score=0;
             this.attack=[];
+            this.collision=[];
             this.player = new Player(this);
             this.input=new InputHandler(this);
             this.player.currentState = this.player.states[1];
@@ -49,6 +53,10 @@ window.addEventListener('load',function(){
                 attack.update();
                 if (attack.HitDeletion) this.attack.splice(this.attack.indexOf(attack),1);
             })
+            this.collision.forEach(collision=>{
+                collision.update(deltaTime);
+                if (collision.collisionDeletion) this.collision.splice(this.collision.indexOf(collision),1);
+            })
         }
         draw(context){
             
@@ -60,12 +68,16 @@ window.addEventListener('load',function(){
             this.attack.forEach(attack=>{
                 attack.draw(context);
             })
+            this.collision.forEach(collision=>{
+                collision.draw(context);
+            })
             this.UI.draw(context);
             
         }
+        //敌人生成
         addEnemy(){
-            if(Math.random()<0.1)this.enemies.push(new GroundEnemy(this));
-            else if(Math.random()<0.1) this.enemies.push(new ZombieEnemy(this));
+            if(Math.random()<0.2)this.enemies.push(new GroundEnemy(this));
+            else if(Math.random()<0.1&&this.score<30) this.enemies.push(new ZombieEnemy(this));
             if(Math.random()<0.5)this.enemies.push(new FlyingEnemy(this));
             //console.log(game.enemies);
         }

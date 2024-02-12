@@ -1,3 +1,4 @@
+import {CollisionAnimation} from './collisionAnimation.js'
 import {
     StandingLeft,
     StandingRight,
@@ -49,6 +50,7 @@ export class Player{
         this.currentState=null;
     }
     update(input,deltaTime){
+        this.checkcollision();
         //默认角色初始状态
         this.currentState.handleInput(input,this.game);
         //键盘输入控制角色
@@ -65,9 +67,9 @@ export class Player{
         //检测角色是否到达画布边界
         
         
-        if(this.game.score==0){
+        if(this.game.score<30){
             if (this.x<0) this.x=0;
-            else if (this.x>this.game.width*2/3) this.x=this.game.width*2/3;    
+            else if (this.x>this.game.width*3/5) this.x=this.game.width*3/5;    
             if (this.y<0) this.y=0;
             else if (this.y>this.game.height-this.height-this.game.groundMargin) this.y=this.game.height-this.height-this.game.groundMargin;
         }else if(this.game.score>=30){
@@ -113,9 +115,39 @@ export class Player{
         return this.y>=this.game.height-this.height-this.game.groundMargin;
     }
     setState(state){
-        //通过第53行代码被'.state.js'的handleInput执行
+        //通过第55行代码被'.state.js'的handleInput执行
         this.currentState=this.states[state];
-        console.log(this.states[state]);
         this.currentState.enter(this.game);
+    }
+    checkcollision(){
+        this.game.enemies.forEach(enemy=>{
+            if(enemy.x<this.x+this.width&&
+                enemy.x+enemy.width>this.x&&
+                enemy.y<this.y+this.height&&
+                enemy.y+enemy.height>this.y
+                ){
+                enemy.EnemyDeletion=true;
+                this.game.collision.push(new CollisionAnimation(this.game,enemy.x,enemy.y));
+                if(this.currentState===this.states[10]||this.currentState===this.states[11]){
+                    this.game.score++;
+                }else{
+                    this.game.life --;
+                    if(this.game.lives<=0) this.game.gameOver=true;
+                }
+            }
+            this.game.attack.forEach(attack=>{
+
+                if(attack.x<enemy.x+enemy.width&&
+                    attack.x+attack.width*attack.zoom>enemy.x&&
+                    attack.y<enemy.y+enemy.height&&
+                    attack.y+attack.height*attack.zoom>enemy.y
+                ){
+                    enemy.EnemyDeletion=true;
+                    attack.HitDeletion=true;
+                    this.game.collision.push(new CollisionAnimation(this.game,enemy.x,enemy.y));
+                    this.game.score++;
+                }
+            })
+        })
     }
 }

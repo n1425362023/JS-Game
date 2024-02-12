@@ -354,6 +354,8 @@ export class ScrollingLeft extends State {
             this.player.setState(state.STANDINGLEFT);
         }else if(!input.includes('k')&&!this.player.onGround()){
             this.player.setState(state.FALLINGLEFT);
+        }else if(input.includes('d')&&input.indexOf('d')>input.indexOf('a')){
+            this.player.setState(state.SCROLLINGRIGHT);
         }
     }
 }
@@ -375,6 +377,8 @@ export class ScrollingRight extends State {
             this.player.setState(state.STANDINGRIGHT);
         }else if(!input.includes('k')&&!this.player.onGround()){
             this.player.setState(state.FALLINGRIGHT);
+        }else if(input.includes('a')&&input.indexOf('a')>input.indexOf('d')){
+            this.player.setState(state.SCROLLINGLEFT);
         }
     }
 }
