@@ -1,4 +1,5 @@
 import {CollisionAnimation} from './collisionAnimation.js'
+import {Message} from './message.js'
 import {
     StandingLeft,
     StandingRight,
@@ -121,15 +122,17 @@ export class Player{
     }
     checkcollision(){
         this.game.enemies.forEach(enemy=>{
-            if(enemy.x<this.x+this.width&&
-                enemy.x+enemy.width>this.x&&
-                enemy.y<this.y+this.height&&
-                enemy.y+enemy.height>this.y
+            const dx=(enemy.x+enemy.width*enemy.zoom/2-20)-(this.x+this.width/2)
+            const dy=(enemy.y+enemy.height*enemy.zoom/2)-(this.y+this.height/2+20)
+            const distance=Math.sqrt(dx*dx+dy*dy)
+            if(
+                distance<enemy.width/3+this.width/3
                 ){
                 enemy.EnemyDeletion=true;
                 this.game.collision.push(new CollisionAnimation(this.game,enemy.x,enemy.y));
                 if(this.currentState===this.states[10]||this.currentState===this.states[11]){
                     this.game.score++;
+                    this.game.message.push(new Message("+1",enemy.x,enemy.y));
                 }else{
                     this.game.life --;
                     if(this.game.life<=0) this.game.gameOver=true;
@@ -146,6 +149,7 @@ export class Player{
                     attack.HitDeletion=true;
                     this.game.collision.push(new CollisionAnimation(this.game,enemy.x,enemy.y));
                     this.game.score++;
+                    this.game.message.push(new Message("+1",enemy.x,enemy.y));
                 }
             })
         })
