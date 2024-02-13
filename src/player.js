@@ -132,7 +132,7 @@ export class Player{
                     this.game.score++;
                 }else{
                     this.game.life --;
-                    if(this.game.lives<=0) this.game.gameOver=true;
+                    if(this.game.life<=0) this.game.gameOver=true;
                 }
             }
             this.game.attack.forEach(attack=>{
