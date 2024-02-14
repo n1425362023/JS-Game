@@ -1,7 +1,7 @@
 import {Player} from './player.js'
 import {InputHandler} from './input.js'
 import {Background} from './background.js'
-import {GroundEnemy,FlyingEnemy,ZombieEnemy} from './enemy.js'
+import {GroundEnemy,FlyingEnemy,ZombieEnemy,GhostEnemy} from './enemy.js'
 import {UI} from './UI.js'
 
 window.addEventListener('load',function(){
