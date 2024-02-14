@@ -126,7 +126,8 @@ export class Player{
             const dy=(enemy.y+enemy.height*enemy.zoom/2)-(this.y+this.height/2+20)
             const distance=Math.sqrt(dx*dx+dy*dy)
             if(
-                distance<enemy.width/3+this.width/3
+                distance<enemy.width/3+this.width/3&&
+                enemy.transparent>0.9
                 ){
                 enemy.EnemyDeletion=true;
                 this.game.collision.push(new CollisionAnimation(this.game,enemy.x,enemy.y));
@@ -143,7 +144,8 @@ export class Player{
                 if(attack.x<enemy.x+enemy.width&&
                     attack.x+attack.width*attack.zoom>enemy.x&&
                     attack.y<enemy.y+enemy.height&&
-                    attack.y+attack.height*attack.zoom>enemy.y
+                    attack.y+attack.height*attack.zoom>enemy.y&&
+                   enemy.transparent>0.9
                 ){
                     enemy.EnemyDeletion=true;
                     attack.HitDeletion=true;
