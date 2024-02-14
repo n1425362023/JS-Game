@@ -33,7 +33,7 @@ window.addEventListener('load',function(){
             this.UI=new UI(this);
             this.fontColor='black';
             this.sound=new Audio;
-            this.sound.src='../material/music.mp3';
+            this.sound.src='https://cdn.jsdelivr.net/gh/n1425362023/Picture@main/img/202402141157280.mp3';
 
         }
         update(deltaTime){
