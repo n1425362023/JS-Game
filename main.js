@@ -63,7 +63,6 @@ window.addEventListener('load',function(){
             this.message.forEach(message=>{
                 message.update();
                 if(message.messageDeletion) this.message.splice(this.message.indexOf(message),1);
-                console.log(this.message.messageDeletion);
             })
         }
         draw(context){
