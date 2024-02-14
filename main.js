@@ -90,7 +90,7 @@ window.addEventListener('load',function(){
             if(Math.random()<0.2)this.enemies.push(new GroundEnemy(this));
             else if(Math.random()<0.1&&this.score<100) this.enemies.push(new ZombieEnemy(this));
             if(Math.random()<0.5)this.enemies.push(new FlyingEnemy(this));
-            if(Math.random()<0.5)this.enemies.push(new BossGhost(this));
+            if(Math.random()<0.5)this.enemies.push(new GhostEnemy(this));
             //console.log(game.enemies);
         }
     }
