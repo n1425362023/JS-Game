@@ -1,7 +1,7 @@
 import {Player} from './player.js'
 import {InputHandler} from './input.js'
 import {Background} from './background.js'
-import {GroundEnemy,FlyingEnemy,ZombieEnemy} from './enemy.js'
+import {GroundEnemy,FlyingEnemy,ZombieEnemy,GhostEnemy} from './enemy.js'
 import {UI} from './UI.js'
 
 window.addEventListener('load',function(){
@@ -63,7 +63,6 @@ window.addEventListener('load',function(){
             this.message.forEach(message=>{
                 message.update();
                 if(message.messageDeletion) this.message.splice(this.message.indexOf(message),1);
-                console.log(this.message.messageDeletion);
             })
         }
         draw(context){
@@ -89,7 +88,8 @@ window.addEventListener('load',function(){
         addEnemy(){
             if(Math.random()<0.2)this.enemies.push(new GroundEnemy(this));
             else if(Math.random()<0.1&&this.score<30) this.enemies.push(new ZombieEnemy(this));
-            if(Math.random()<0.5)this.enemies.push(new FlyingEnemy(this));
+            if(Math.random()<0.8)this.enemies.push(new FlyingEnemy(this));
+            if(Math.random()<0.5)this.enemies.push(new GhostEnemy(this));
             //console.log(game.enemies);
         }
     }
