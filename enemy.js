@@ -1,3 +1,4 @@
+import {CollisionAnimation} from "./collisionAnimation.js";
 class Enemy{
     constructor(){
         this.frameX=0;
@@ -7,7 +8,7 @@ class Enemy{
         this.frameTimer=0;
         this.EnemyDeletion=false;
         this.MaxFrameX=0;
-        
+        this.transparent=1;
     }
     update(deltaTime){
         this.x-=this.speedX;
@@ -101,6 +102,35 @@ export class ZombieEnemy extends Enemy{
     }
     
 }  
-export class SpiderEnemy extends Enemy{
-    
+export class GhostEnemy extends Enemy{
+    constructor(game){
+        super();
+        this.game=game;
+        this.zoom = 0.6;
+        this.frameX=0;
+        this.frameY=0;
+        this.width=261;
+        this.height=209;
+        this.x=this.game.width;
+        this.y=Math.random()*this.game.height*0.5;
+        this.speedX=3;
+        this.speedY=0;
+        this.MaxFrameX=5;
+        this.image=document.getElementById('BossGhost');
+        this.angle=0;
+        this.turn=Math.random()*0.2-0.1;
+        
+    }
+    update(deltaTime){
+        super.update(deltaTime);
+        this.angle+=this.turn;
+        this.y+=Math.sin(this.angle);
+        this.transparent=Math.sin(this.angle)*0.5+0.95;
+    }
+    draw(context){
+        context.save()  
+        context.globalAlpha=this.transparent;
+        super.draw(context)
+        context.restore()  
+    }
 }
