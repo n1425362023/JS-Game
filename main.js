@@ -88,8 +88,9 @@ window.addEventListener('load',function(){
         //敌人生成
         addEnemy(){
             if(Math.random()<0.2)this.enemies.push(new GroundEnemy(this));
-            else if(Math.random()<0.1&&this.score<30) this.enemies.push(new ZombieEnemy(this));
+            else if(Math.random()<0.1&&this.score<50) this.enemies.push(new ZombieEnemy(this));
             if(Math.random()<0.5)this.enemies.push(new FlyingEnemy(this));
+            if(Math.random()<0.5)this.enemies.push(new BossGhost(this));
             //console.log(game.enemies);
         }
     }
