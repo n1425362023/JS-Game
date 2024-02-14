@@ -116,7 +116,7 @@ export class GhostEnemy extends Enemy{
         this.speedX=3;
         this.speedY=0;
         this.MaxFrameX=5;
-        this.image=document.getElementById('BossGhost');
+        this.image=document.getElementById('GhostEnemy');
         this.angle=0;
         this.turn=Math.random()*0.2-0.1;
         
