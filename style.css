@@ -18,7 +18,7 @@ body {
     
 }
 #player,#background1,#background2,#background3,#background4,#background5,
-#GroundEnemy,#FlyingEnemy,#ZombieEnemy,#hitfire,#boom,#enemydeath,#life{
+#GroundEnemy,#FlyingEnemy,#ZombieEnemy,#GhostEnemy,#hitfire,#boom,#enemydeath,#life{
     display: none;
 }
    
