@@ -10,7 +10,7 @@ class Backer {
     }
     update(input){
         if (this.x < -this.width)  this.x = 0;
-        if (input.includes('d')&&input.indexOf('d')>input.indexOf('a')&&this.game.score<30) this.x-=this.game.player.maxSpeed*this.backgroundspeed;
+        if (input.includes('d')&&input.indexOf('d')>input.indexOf('a')&&this.game.score<100) this.x-=this.game.player.maxSpeed*this.backgroundspeed;
         /*else if (input.includes('a')&&input.indexOf('a')>input.indexOf('d')) this.x+=this.game.player.maxSpeed*this.backgroundspeed;
         此代码注释原因是当游戏刚开始，角色向左移动时，背景向右移动，造成白幕
         所以注释掉,背景只能当角色向右移动时移动，若你有解决办法可自行优化*/ 
