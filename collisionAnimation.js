@@ -13,7 +13,7 @@ export class CollisionAnimation {
         this.frameInterval=1000/this.fps;
         this.frameTimer = 0;
         this.sound=new Audio();
-        this.sound.src="../material/explore.wav";
+        this.sound.src="https://cdn.jsdelivr.net/gh/n1425362023/Picture@main/img/202402141157166.wav";
         this.collisionDeletion=false;
     }
     
