@@ -68,12 +68,12 @@ export class Player{
         //检测角色是否到达画布边界
         
         
-        if(this.game.score<50){
+        if(this.game.score<100){
             if (this.x<0) this.x=0;
             else if (this.x>this.game.width*3/5) this.x=this.game.width*3/5;    
             if (this.y<0) this.y=0;
             else if (this.y>this.game.height-this.height-this.game.groundMargin) this.y=this.game.height-this.height-this.game.groundMargin;
-        }else if(this.game.score>=50){
+        }else if(this.game.score>=100){
             if (this.x<0) this.x=0;
             else if (this.x>this.game.width-this.width) this.x=this.game.width-this.width;    
             if (this.y<0) this.y=0;
