@@ -8,7 +8,7 @@ export class Hit{
         this.height=90;
         this.speedX=3;
         this.speedY=0;
-        this.color='rgba(0,0,0,0.5)'
+        //this.color='rgba(0,0,0,0.5)'
         this.HitDeletion=false;
         this.size=Math.random()*10+10;
         this.zoom=0.7;
@@ -30,5 +30,30 @@ export class Hit{
         context.arc(this.x,this.y,this.size,0,Math.PI*2);
         context.fillStyle=this.color;
         context.fill();*/
+    }
+}
+export class SpiderAttack{
+    constructor(enemy){
+        this.enemy=enemy;
+        this.width=60;
+        this.height=77;
+        this.zoom=2;
+        this.x=Math.random()*(enemy.game.width-this.width*this.zoom)-this.width*this.zoom;
+        this.y=-this.height*this.zoom*Math.random();
+        this.speedX=0;
+        this.speedY=5;
+        this.HitDeletion=false;
+   
+        
+        this.image=document.getElementById('SpiderAttack');
+    }
+    update(){
+        this.y+=this.speedY;
+        
+        if(this.y >this.enemy.game.height) this.HitDeletion=true;
+    }
+    draw(context){
+        context.drawImage(this.image,0,0,this.width,this.height,this.x,this.y,this.width*this.zoom,this.height*this.zoom);
+        
     }
 }

@@ -18,7 +18,8 @@ body {
     
 }
 #player,#background1,#background2,#background3,#background4,#background5,
-#GroundEnemy,#FlyingEnemy,#ZombieEnemy,#GhostEnemy,#hitfire,#boom,#enemydeath,#life{
+#GroundEnemy,#FlyingEnemy,#ZombieEnemy,#GhostEnemy,#SpiderEnemy,
+#hitfire,#SpiderAttack,#boom,#enemydeath,#life{
     display: none;
 }
    
@@ -30,5 +31,19 @@ body {
     width:100%;
     font-size:80px;
 }
+/*
+#HP{
+    position: absolute;
+    background-color: #4CAF50;
+    opacity: 0.6;
+    font-size:10px;
+    width:800px;
+    height:30px;
+    text-align: center;
+    color:red;
+}
+*/
+
+
 
 

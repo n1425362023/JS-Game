@@ -1,4 +1,5 @@
 import {CollisionAnimation} from './collisionAnimation.js'
+export {SpiderEnemy} from './Boss.js'
 import {Message} from './message.js'
 import {
     StandingLeft,
@@ -73,7 +74,7 @@ export class Player{
             else if (this.x>this.game.width*3/5) this.x=this.game.width*3/5;    
             if (this.y<0) this.y=0;
             else if (this.y>this.game.height-this.height-this.game.groundMargin) this.y=this.game.height-this.height-this.game.groundMargin;
-        }else if(this.game.score>=30){
+        }else if(this.game.score>=50){
             if (this.x<0) this.x=0;
             else if (this.x>this.game.width-this.width) this.x=this.game.width-this.width;    
             if (this.y<0) this.y=0;
@@ -105,7 +106,7 @@ export class Player{
         console.log(deltaTime);
         console.log(this.frameTimer)
         console.log(this.frameX);
-        运行这个conso.log(frameTimer)显示NaN(非数字的值)，原因没找到*/
+        运行这个console.log(frameTimer)显示NaN(非数字的值)，原因没找到*/
         }
     draw(context){
         //context.strokeRect(this.x,this.y,this.width,this.height);
@@ -145,7 +146,7 @@ export class Player{
                     attack.x+attack.width*attack.zoom>enemy.x&&
                     attack.y<enemy.y+enemy.height&&
                     attack.y+attack.height*attack.zoom>enemy.y&&
-                   enemy.transparent>0.9
+                    enemy.transparent>0.9
                 ){
                     enemy.EnemyDeletion=true;
                     attack.HitDeletion=true;
@@ -155,5 +156,52 @@ export class Player{
                 }
             })
         })
+
+        this.game.boss.forEach(enemy=>{
+            const dx=(enemy.x+enemy.width*enemy.zoom/2-20)-(this.x+this.width/2)
+            const dy=(enemy.y+enemy.height*enemy.zoom/2)-(this.y+this.height/2+20)
+            const distance=Math.sqrt(dx*dx+dy*dy)
+            if(
+                distance<enemy.width/3+this.width/3
+                ){
+                   
+                //this.game.collision.push(new CollisionAnimation(this.game,enemy.x,enemy.y));
+                if(this.currentState===this.states[10]||this.currentState===this.states[11]){
+                    enemy.hp-=3;
+                    if(enemy.hp<=0){
+                        enemy.EnemyDeletion=true;
+                        this.game.win=true;
+                    } 
+                    this.game.message.push(new Message("-3",enemy.x,enemy.y));
+                }else{
+                    this.game.life --;
+                    if(this.game.life<=0){
+                        this.game.gameOver=true;
+                        this.game.collision.push(new CollisionAnimation(this.game,enemy.x,enemy.y));
+                    } 
+                }
+            }
+            this.game.attack.forEach(attack=>{
+
+                if(attack.x<enemy.x+enemy.width&&
+                    attack.x+attack.width*attack.zoom>enemy.x&&
+                    attack.y<enemy.y+enemy.height&&
+                    attack.y+attack.height*attack.zoom>enemy.y
+                ){ 
+                    attack.HitDeletion=true;
+                    enemy.hp-=5;
+                    this.game.message.push(new Message("-5",enemy.x,enemy.y));
+                    }
+                    if(enemy.hp<=0){
+                        this.game.collision.push(new CollisionAnimation(this.game,enemy.x,enemy.y));
+                        this.game.win=true;
+                }
+            })
+            enemy.checkcollision();
+        })
+        
+
+
+
     }
 }

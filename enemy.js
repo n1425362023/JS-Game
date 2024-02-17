@@ -1,4 +1,4 @@
-import {CollisionAnimation} from "./collisionAnimation.js";
+
 class Enemy{
     constructor(){
         this.frameX=0;
@@ -67,9 +67,11 @@ export class FlyingEnemy extends Enemy{
         this.speedX=3;
         this.speedY=0;
         this.MaxFrameX=5;
-        this.image=document.getElementById('FlyingEnemy');
-        this.angle=0;
         this.turn=Math.random()*0.2-0.1;
+        this.angle=0;
+        this.image=document.getElementById('FlyingEnemy');
+
+       
     }
     update(deltaTime){
         super.update(deltaTime);
@@ -116,9 +118,10 @@ export class GhostEnemy extends Enemy{
         this.speedX=3;
         this.speedY=0;
         this.MaxFrameX=5;
-        this.image=document.getElementById('GhostEnemy');
-        this.angle=0;
         this.turn=Math.random()*0.2-0.1;
+        this.angle=0;
+        this.image=document.getElementById('GhostEnemy');
+        
         
     }
     update(deltaTime){
@@ -128,9 +131,9 @@ export class GhostEnemy extends Enemy{
         this.transparent=Math.sin(this.angle)*0.5+0.95;
     }
     draw(context){
-        context.save()  
+        context.save();  
         context.globalAlpha=this.transparent;
-        super.draw(context)
-        context.restore()  
+        super.draw(context);
+        context.restore();  
     }
 }
