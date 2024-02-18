@@ -1,4 +1,7 @@
-
+/*
+定义Enemy父类，代表怪物的共同属性
+子类继承父类，并实现类的多态
+*/
 class Enemy{
     constructor(){
         this.frameX=0;

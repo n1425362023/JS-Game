@@ -9,6 +9,7 @@ window.addEventListener('load',function(){
     const loading=document.getElementById('loading');
     loading.style.display='none';
     const canvas=document.getElementById('canvas1');
+    //HTMLCanvasElement.getContext() 方法返回canvas 的上下文
     const ctx=canvas.getContext('2d');
     canvas.width=window.innerWidth;
     canvas.height=window.innerHeight;
@@ -17,12 +18,14 @@ window.addEventListener('load',function(){
     hp.style.left=canvas.width*0.2+'px';
     hp.style.top=canvas.height*0.03+'px';
     */
-
+   
+    //游戏的基本类，包含游戏所有对象
     class Game{
         constructor(width,height){
             this.life =4;
             this.gameOver=false;
             this.win=false;
+            this.paused=false;
             this.width=width;
             this.height=height;
             this.groundMargin=110;                //方便设置角色在屏幕的位置
@@ -45,9 +48,11 @@ window.addEventListener('load',function(){
             this.sound=new Audio;
             this.sound.src='../material/music.mp3';
             this.Boss=true;
+            
            
 
         }
+        //upgrate更新敌人、玩家、武器、碰撞的状态
         update(deltaTime){
             this.time+=deltaTime*0.001;
             this.background.update(this.input.keys);
@@ -59,6 +64,7 @@ window.addEventListener('load',function(){
                 this.addEnemy();
                 this.enemyTimer=0;
             }
+            //利用内置函数forEach传参
             this.enemies.forEach(enemy=>{
                 enemy.update(deltaTime);
                 if (enemy.EnemyDeletion) this.enemies.splice(this.enemies.indexOf(enemy),1);
@@ -105,7 +111,7 @@ window.addEventListener('load',function(){
         //敌人生成
         addEnemy(){
             if(Math.random()<0.2)this.enemies.push(new GroundEnemy(this));
-            else if(Math.random()<0.1&&this.score<30) this.enemies.push(new ZombieEnemy(this));
+            else if(Math.random()<0.1&&this.score<50) this.enemies.push(new ZombieEnemy(this));
             if(Math.random()<0.8)this.enemies.push(new FlyingEnemy(this));
             if(Math.random()<0.5)this.enemies.push(new GhostEnemy(this));
             if(this.score>50&&this.Boss){
@@ -128,11 +134,13 @@ window.addEventListener('load',function(){
         game.draw(ctx);
         if(!game.gameOver&&!game.win){
             requestAnimationFrame(animate);
+            //利用requestAnimationFrame回调函数确保游戏正常运行
+            
             game.sound.play();
         }else{
             game.sound.pause();
         }
-        console.log(game.win);
     }
     animate(0);
+    
 });

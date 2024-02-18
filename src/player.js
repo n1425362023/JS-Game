@@ -63,12 +63,10 @@ export class Player{
             this.x-=this.maxSpeed*1.5;
             this.direction=-1.5;
         } 
-       
+        //角色跳跃
         if(input.includes('w')&&input.indexOf('w')>input.indexOf('s')&&this.onGround()) this.speedY-=20;
         this.y += this.speedY;
         //检测角色是否到达画布边界
-        
-        
         if(this.game.score<50){
             if (this.x<0) this.x=0;
             else if (this.x>this.game.width*3/5) this.x=this.game.width*3/5;    
@@ -80,9 +78,8 @@ export class Player{
             if (this.y<0) this.y=0;
             else if (this.y>this.game.height-this.height-this.game.groundMargin) this.y=this.game.height-this.height-this.game.groundMargin;
         }
-        
-        
-        
+
+        //角色重力
         if (!this.onGround()) this.speedY +=this.gravity;
         else this.speedY=0;
         if (this.frameTimer < this.frameInterval) {       
@@ -117,10 +114,11 @@ export class Player{
         return this.y>=this.game.height-this.height-this.game.groundMargin;
     }
     setState(state){
-        //通过第55行代码被'.state.js'的handleInput执行
+        //通过第57行代码被'.state.js'的handleInput执行
         this.currentState=this.states[state];
         this.currentState.enter(this.game);
     }
+    //碰撞检测
     checkcollision(){
         this.game.enemies.forEach(enemy=>{
             const dx=(enemy.x+enemy.width*enemy.zoom/2-20)-(this.x+this.width/2)

@@ -55,12 +55,13 @@ export class SpiderEnemy extends Boss{
     update(deltaTime){
         super.update(deltaTime);
         if(this.y>this.game.height-this.height*this.zoom-this.game.groundMargin*1.3 || this.y<-this.height*this.zoom){
-            this.speedY*=-1;
+            this.speedY*=-1;            //确保Boss来回移动
         }
         this.hit(deltaTime);
        
     }
     draw(context){
+        //绘制线条
         super.draw(context)
         context.save()  
         context.beginPath();
@@ -77,6 +78,7 @@ export class SpiderEnemy extends Boss{
         context.fillStyle = "rgba(255, 0, 0, 0.5)";
         context.fillRect(300,0,this.hp,30);
     }
+    //Boss的攻击方式
     hit(deltaTime){
         if(this.Cooldown<3){
             this.Cooldown+=deltaTime*0.001;
@@ -96,11 +98,10 @@ export class SpiderEnemy extends Boss{
     }
     checkcollision(){
         this.attack.forEach(attack=> {
-    
-            if (attack.x < this.game.player.x + this.game.player.width &&
-                attack.x + attack.width * attack.zoom > this.game.player.x &&
-                attack.y < this.game.player.y + this.game.player.height &&
-                attack.y + attack.height * attack.zoom > this.game.player.y
+            if (attack.x<this.x+this.game.player.width&&
+                attack.x+attack.width*attack.zoom>this.game.player.x&&
+                attack.y<this.game.player.y+this.game.player.height&&
+                attack.y+attack.height*attack.zoom>this.game.player.y
             ){
                 attack.HitDeletion = true;
                 this.game.life--;
@@ -109,7 +110,6 @@ export class SpiderEnemy extends Boss{
                 }
             }
         })    
-
-
+        
     }
 }

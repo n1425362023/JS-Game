@@ -1,3 +1,4 @@
+//用来对游戏界面美化
 export class UI {
     constructor(game) {
         this.game = game;

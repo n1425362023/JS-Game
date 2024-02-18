@@ -1,4 +1,5 @@
 import {Hit} from './hit.js';
+//对玩家的摁键做出回应，enter更新角色不同状态的图片，handleInput负责处理内在逻辑
 const state = {
     STANDINGLEFT:       0,
     STANDINGRIGHT:      1,
@@ -51,6 +52,7 @@ export class StandingLeft extends State {
         }else if (input.includes('k')){
             this.player.setState(state.SCROLLINGLEFT);
         }
+        if(input.includes('p')) game.paused=!game.paused;
     }
 }
 export class StandingRight extends State {RIGHT
@@ -84,6 +86,7 @@ export class StandingRight extends State {RIGHT
         }else if (input.includes('k')){
             this.player.setState(state.SCROLLINGRIGHT);
         }
+        if(input.includes('p')) game.paused=!game.paused;
     }
 }
 export class SittingLeft extends State {
@@ -115,6 +118,7 @@ export class SittingLeft extends State {
         }else if (input.includes('k')){
             this.player.setState(state.SCROLLINGLEFT);
         }
+        if(input.includes('p')) game.paused=!game.paused;
     }
 }
 export class SittingRight extends State {
@@ -146,6 +150,7 @@ export class SittingRight extends State {
         }else if (input.includes('k')){
             this.player.setState(state.SCROLLINGRIGHT);
         }
+        if(input.includes('p')) game.paused=!game.paused;
     }
 }
 export class RunningLeft extends State {
@@ -180,6 +185,7 @@ export class RunningLeft extends State {
         }else if (input.includes('k')){
             this.player.setState(state.SCROLLINGLEFT);
         }
+        if(input.includes('p')) game.paused=!game.paused;
     }
             
 }
@@ -215,6 +221,7 @@ export class RunningRight extends State {
         }else if (input.includes('k')){
             this.player.setState(state.SCROLLINGRIGHT);
         }
+        if(input.includes('p')) game.paused=!game.paused;
     }
             
 }
@@ -247,6 +254,7 @@ export class JumpingLeft extends State {
         }else if (input.includes('k')){
             this.player.setState(state.SCROLLINGLEFT);
         }
+        if(input.includes('p')) game.paused=!game.paused;
     }
 }
 export class JumpingRight extends State {
@@ -278,6 +286,7 @@ export class JumpingRight extends State {
         }else if (input.includes('k')){
             this.player.setState(state.SCROLLINGRIGHT);
         }
+        if(input.includes('p')) game.paused=!game.paused;
     }
 }
 export class FallingLeft extends State {
@@ -306,6 +315,7 @@ export class FallingLeft extends State {
         }else if (input.includes('d')&&input.indexOf('d')>input.indexOf('a')&&!this.player.onGround()){
             this.player.setState(state.FALLINGRIGHT);
         }
+        if(input.includes('p')) game.paused=!game.paused;
     }
 }
 export class FallingRight extends State {
@@ -334,6 +344,7 @@ export class FallingRight extends State {
         }else if(input.includes('a')&&input.indexOf('a')>input.indexOf('d')&&!this.player.onGround()){
             this.player.setState(state.FALLINGLEFT);
         }
+        if(input.includes('p')) game.paused=!game.paused;
     }
 }
 export class ScrollingLeft extends State {
@@ -349,7 +360,7 @@ export class ScrollingLeft extends State {
         this.player.MaxFrameX=6;
         this.player.frameY=11;
     }
-    handleInput(input){
+    handleInput(input,game){
         if(!input.includes('k')&&this.player.onGround()){
             this.player.setState(state.STANDINGLEFT);
         }else if(!input.includes('k')&&!this.player.onGround()){
@@ -357,6 +368,7 @@ export class ScrollingLeft extends State {
         }else if(input.includes('d')&&input.indexOf('d')>input.indexOf('a')){
             this.player.setState(state.SCROLLINGRIGHT);
         }
+        if(input.includes('p')) game.paused=!game.paused;
     }
 }
 export class ScrollingRight extends State {
@@ -372,7 +384,7 @@ export class ScrollingRight extends State {
         this.player.MaxFrameX=6;
         this.player.frameY=10;
     }
-    handleInput(input){
+    handleInput(input,game){
         if(!input.includes('k')&&this.player.onGround()){    
             this.player.setState(state.STANDINGRIGHT);
         }else if(!input.includes('k')&&!this.player.onGround()){
@@ -380,6 +392,7 @@ export class ScrollingRight extends State {
         }else if(input.includes('a')&&input.indexOf('a')>input.indexOf('d')){
             this.player.setState(state.SCROLLINGLEFT);
         }
+        if(input.includes('p')) game.paused=!game.paused;
     }
 }
 
